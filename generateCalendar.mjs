@@ -7,7 +7,7 @@ XLSX.set_fs(fs);
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const excelFilePath = path.resolve(__dirname, 'sample-schedule.xlsx');
-const myName = 'Satou';
+const myName = 'Suzuki';
 const workbook = XLSX.readFile(excelFilePath)
 const sheet = workbook.Sheets[workbook.SheetNames[0]];
 const shifts = [];
