@@ -21,10 +21,10 @@ sheetJson.forEach((row) => {
     shiftTimes.forEach((shiftTimes) => {
       shifts.push({
         date: new Date(currentDate),
-        name: row[0],
         time: shiftTimes.trim()
       });
     });
   }  
 });
+
 console.log(shifts);
