@@ -7,7 +7,7 @@ XLSX.set_fs(fs);
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const excelFilePath = path.resolve(__dirname, 'sample-schedule.xlsx');
-const myName = 'Suzuki';
+const myName = 'Satou';
 const workbook = XLSX.readFile(excelFilePath)
 const sheet = workbook.Sheets[workbook.SheetNames[0]];
 const shifts = [];
@@ -27,4 +27,14 @@ sheetJson.forEach((row) => {
   }  
 });
 
-console.log(shifts);
+const cal = ical({name: 'シフトカレンダー'});
+shifts.forEach(shift => {
+  const [startTime, endTime] = shift.time.split('～');
+  const startDate = new Date(shift.date);
+  const endDate = new Date(shift.date);
+  const [startHour, startMinute] =  startTime.split(':').map(Number);
+  const [endHour, endMinute] =  endTime.split(':').map(Number);
+  if (endHour < startHour || (endHour == startHour && endMinute < startMinute)) {
+    endDate.setDate(endDate.getDate() + 1);
+  }
+});
